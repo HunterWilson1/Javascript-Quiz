@@ -1,0 +1,18 @@
+header {
+    display: flex;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    display: block;
+    border-radius: 10px;
+    border: none;
+}
+.choice-button {
+    width: 100%;
+}
