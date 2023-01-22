@@ -1,18 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #333333;
+    background-color: #f2f2f2;
+}
+
 header {
-    display: flex;
+    background-color: #333333;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
 }
 
 main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Start screen styles */
+#start-screen {
+    text-align: center;
+    padding: 50px;
+}
+
+#start-screen h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#start-screen p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#start-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+/* Question screen styles */
+#question-screen {
+    text-align: center;
+    padding: 50px;
+}
+
+#question-screen h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#q-choices {
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
-.button {
-    display: block;
-    border-radius: 10px;
-    border: none;
-}
 .choice-button {
-    width: 100%;
+    background-color: #ffffff
+
 }

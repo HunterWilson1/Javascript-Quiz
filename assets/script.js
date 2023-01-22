@@ -38,7 +38,7 @@ function startQuiz() {
 }
 
 function countdownTimer() {
-    time --;
+    time--;
     displayTime();
     if (time < 1) {
         endQuiz();
@@ -66,6 +66,10 @@ function showQuestion () {
 
 document.querySelector("#q-choices").addEventListener("click", checkAnswer);
 
+function correctChoice(choiceButton) {
+return choiceButton.textContent === questions[currentQ].answer;
+}
+
 function checkAnswer(event){
     let selected = event.target.id;
     if (selected === questions[currentQ].answer) {
@@ -83,5 +87,7 @@ function checkAnswer(event){
     }
 }
 
-
+function endQuiz() {
+    clearInterval(intervalID)
+}
 
