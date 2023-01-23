@@ -20,6 +20,8 @@ const questions = [
 
 const startScreen = document.querySelector("#start-screen");
 const questionScreen = document.querySelector("#question-screen")
+const scoreScreen = document.querySelector("#score-screen")
+const leaderboardScreen = document.querySelector("#leaderboard-screen")
 
 var intervalID;
 var time;
@@ -89,5 +91,36 @@ function checkAnswer(event){
 
 function endQuiz() {
     clearInterval(intervalID)
+    scoreScreen.removeAttribute("hidden")
+    questionScreen.setattribute("hidden")
 }
 
+const submitB = document.querySelector("submit-b")
+
+function saveScore(event) {
+    event.preventDefault();
+
+    let highscore = {
+        initials: inputElement.value,
+        score: time,
+    };
+
+    updateHighscore(highscore)
+}
+
+function updateHighscore(highscore) {
+    let highscoreList = submitHighscore();
+    highscoreList.push(highscore);
+    localStorage.setItem("highscoreList". JSON.stringify(highscoreList));
+}
+
+function submitHighscore() {
+    let savedHighsore = localStorage.getItem("highscoreList")
+    if (savedHighsore !== null) {
+        let highscoreList = JSON.parse(savedHighsore)
+        return highscoreList;
+    } else {
+        savedHighsore = [];
+    }
+    return savedHighsore
+}
