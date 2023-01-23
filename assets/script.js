@@ -18,27 +18,43 @@ const questions = [
     }
 ];
 
+//I gave each screen a variable via an id
 const startScreen = document.querySelector("#start-screen");
 const questionScreen = document.querySelector("#question-screen")
 const scoreScreen = document.querySelector("#score-screen")
 const leaderboardScreen = document.querySelector("#leaderboard-screen")
 
+//these variables are used a lot
 var intervalID;
 var time;
 var currentQ;
 
+
+function hideScreens() {
+    startScreen.setAttribute("hidden", true);
+    questionScreen.setAttribute("hidden", true);
+    scoreScreen.setAttribute("hidden", true);
+    leaderboardScreen.setAttribute("hidden", true);
+}
 document.getElementById('start-button').addEventListener('click', startQuiz)
 
 function startQuiz() {
+    
+    hideScreens();
+    //removes the hidden attribute on the questions
     questionScreen.removeAttribute("hidden");
+    //sets the current question of the array to 0 and then displays the first question
     currentQ = 0;
     showQuestion();
-    time = 60;
+    //set the time to 30 because I only have 3 questions
+    time = 30;
+    //starts the countdown and that the timer starts when the startQuiz button is clicked
     intervalID = setInterval(countdownTimer, 1000);
-    displayTime
+    displayTime();
     
 }
 
+//reduces the time by 1 and if the quiz equals less than 0 the quiz should end
 function countdownTimer() {
     time--;
     displayTime();
@@ -47,11 +63,13 @@ function countdownTimer() {
     }
 }
 
+//shows time on screen
 const showTime = document.querySelector("#time");
 function displayTime() {
     showTime.textContent = time;
 }
 
+//shows the qustions and the choices
 function showQuestion () {
     let question = questions[currentQ];
     let choices = question.choices;
@@ -66,15 +84,17 @@ function showQuestion () {
     }
 }
 
+//selcts the div with id of q-choices
 document.querySelector("#q-choices").addEventListener("click", checkAnswer);
 
 function correctChoice(choiceButton) {
 return choiceButton.textContent === questions[currentQ].answer;
 }
 
+//checks answer and takes away time if wrong
 function checkAnswer(event){
-    let selected = event.target.id;
-    if (selected === questions[currentQ].answer) {
+    let choiceButton = event.target;
+    if (correctChoice(choiceButton) === questions[currentQ].answer) {
         alert("Correct!");
     } else {
         alert("Incorrect!");
@@ -89,10 +109,11 @@ function checkAnswer(event){
     }
 }
 
+
 function endQuiz() {
     clearInterval(intervalID)
-    scoreScreen.removeAttribute("hidden")
-    questionScreen.setattribute("hidden")
+    hideScreens();
+    scoreScreen.removeAttribute("hidden");
 }
 
 const submitB = document.querySelector("submit-b")
