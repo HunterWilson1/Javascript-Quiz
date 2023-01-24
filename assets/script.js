@@ -87,19 +87,18 @@ function showQuestion () {
 //selcts the div with id of q-choices
 document.querySelector("#q-choices").addEventListener("click", checkAnswer);
 
-function correctChoice(choiceButton) {
-return choiceButton.textContent === questions[currentQ].answer;
-}
-
 //checks answer and takes away time if wrong
 function checkAnswer(event){
-    let choiceButton = event.target;
-    if (correctChoice(choiceButton) === questions[currentQ].answer) {
+    let choiceButton = event.target.innerHTML;
+    if (choiceButton === questions[currentQ].answer) {
         alert("Correct!");
     } else {
         alert("Incorrect!");
         time -= 10;
         displayTime();
+        console.log(event.target)
+        console.log(choiceButton)
+        console.log(questions[currentQ].answer)
     }
     currentQ++;
     if (currentQ === questions.length) {
