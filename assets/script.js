@@ -167,15 +167,14 @@ function saveScore(event) {
 function clearStorage() {
 localStorage.clear();
 displayLeaderBoard();
+scoreList.textContent = ""
 }
 
 //brings back to start
 function rtnToStartScreen() {
-  hideScreens();
-  startScreen.removeAttribute("hidden");
   time = undefined;
   displayTime();
-  inputElement.textContent = ""
+  window.location = 'https://hunterwilson1.github.io/Javascript-Quiz/'
 }
 
 backBtn.addEventListener("click", rtnToStartScreen);
