@@ -24,15 +24,22 @@ const questions = [
 ];
 
 //I gave each screen a variable via an id
+
 const startScreen = document.querySelector("#start-screen");
 const questionScreen = document.querySelector("#question-screen");
 const scoreScreen = document.querySelector("#score-screen");
 const leaderboardScreen = document.querySelector("#leaderboard-screen");
+const backBtn = document.querySelector("#back");
+const submitB = document.getElementById("submit-b");
+const inputElement = document.querySelector("#initials");
+const showTime = document.querySelector("#time");
 
 //these variables are used a lot
 var intervalID;
 var time;
 var currentQ;
+
+let scoreStorage = JSON.parse(localStorage.getItem("score")) || [];
 
 function hideScreens() {
   startScreen.setAttribute("hidden", true);
@@ -40,7 +47,6 @@ function hideScreens() {
   scoreScreen.setAttribute("hidden", true);
   leaderboardScreen.setAttribute("hidden", true);
 }
-document.getElementById("start-button").addEventListener("click", startQuiz);
 
 function startQuiz() {
   hideScreens();
@@ -66,7 +72,6 @@ function countdownTimer() {
 }
 
 //shows time on screen
-const showTime = document.querySelector("#time");
 function displayTime() {
   showTime.textContent = time;
 }
@@ -85,9 +90,6 @@ function showQuestion() {
     choiceButton.textContent = choice;
   }
 }
-
-//selcts the div with id of q-choices
-document.querySelector("#q-choices").addEventListener("click", checkAnswer);
 
 //checks answer and takes away time if wrong
 function checkAnswer(event) {
@@ -114,25 +116,58 @@ function endQuiz() {
   clearInterval(intervalID);
   hideScreens();
   scoreScreen.removeAttribute("hidden");
-  leaderboardScreen.removeAttribute("hidden")
+  leaderboardScreen.removeAttribute("hidden");
+
+  let finalScore = document.querySelector("#score");
+  finalScore.textContent = time;
 }
 
-const submitB = document.querySelector("submit-b");
-const inputElement = document.querySelector("#initials")
+function displayLeaderBoard() {
+  const scoreList = document.getElementById("player-list");
+  scoreList.textContent = ""
 
-submitB.addEventListener("click", saveScore);
+  let sortedStorage = scoreStorage.sort(function(a,b){
+    return b.score - a.score
+  })
+
+  sortedStorage.forEach(function (user, index) {
+    console.log(user, index);
+
+    const li = document.createElement("li");
+    li.textContent = user.initials + ": " + user.score;
+
+    scoreList.appendChild(li);
+  });
+}
+
 
 function saveScore(event) {
+  event.preventDefault();
 
+  const score = {
+    initials: inputElement.value,
+    score: time,
+  };
+
+  scoreStorage.push(score);
+
+  localStorage.setItem("score", JSON.stringify(scoreStorage));
+
+  displayLeaderBoard();
 }
-
-
-const backBtn = document.querySelector("#back");
-backBtn.addEventListener("click", rtnToStartScreen);
 
 function rtnToStartScreen() {
-    hideScreens();
-    startScreen.removeAttribute("hidden");
-    time = undefined
-    displayTime()
+  hideScreens();
+  startScreen.removeAttribute("hidden");
+  time = undefined;
+  displayTime();
 }
+
+backBtn.addEventListener("click", rtnToStartScreen);
+submitB.addEventListener("click", saveScore);
+document.getElementById("start-button").addEventListener("click", startQuiz);
+//selcts the div with id of q-choices
+document.querySelector("#q-choices").addEventListener("click", checkAnswer);
+
+
+displayLeaderBoard();
