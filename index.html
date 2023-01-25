@@ -13,36 +13,39 @@
     </header>
 
     <main>
-        <div id="start-screen">
+        <section id="start-screen">
             <h1>Javascript Quiz</h1>
             <h2>Rules</h2>
             <p>Answer the following questions in 60 seconds. The quiz will end if you answer all the questions or when time runs out. Click the start quiz button when you are ready to begin.</p>
             <button id="start-button">Start Quiz</button>
-        </div>
+        </section>
     
-    <div hidden id="question-screen">
+    <section hidden id="question-screen">
         <h2 id="q-text"></h2>
 
-        <div id="q-choices">
+        <section id="q-choices">
             <button id="choice0" class="choice-button"></button>
             <button id="choice1" class="choice-button"></button>
             <button id="choice2" class="choice-button"></button>
             <button id="choice3" class="choice-button"></button>
-        </div>
-    </div>
+        </section>
+    </section>
 
-    <div hidden id="score-screen">
+    <section hidden id="score-screen">
         <h2>You finished!</h2>
         <p>Your score is <div id="score"></div></p>
         <label id="initials">Enter initials: </label>
         <input type="text" id="initials">
         <button id="submit-b" class="button">Submit</button>
-    </div>
+    </section>
 
-    <div id="leaderboard-screen">
+    <section hidden id="leaderboard-screen">
         <h2>Highscores</h2>
-        <ol id="highscore-list"></ol>
-    </div>
+        <ol id="player-list"></ol>
+        <div>
+            <button id="back" class="button">Back</button>
+        </div>
+    </section>
     </main>
 
 
